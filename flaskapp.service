@@ -4,6 +4,6 @@ Description=Flask Application
 
 User=pythonadm
 WorkingDirectory=/opt/flaskapp
-ExecStart=/bin/bash -c 'cd /opt/flask-app && source ~/.profile && source ./venv/bin/activate && gunicorn --bind=0.0.0.0:8001 --workers=4 application:app'
+ExecStart=/bin/bash -c 'cd /opt/flaskapp && source ~/.profile && source ./venv/bin/activate && gunicorn --bind=0.0.0.0:8001 --workers=4 application:app'
 [Install]
 WantedBy=multi-user.target
