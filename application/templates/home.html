@@ -2,14 +2,40 @@
 
 {% extends 'layout.html' %}
 {% block body_content %}
-	<h1>Home Page</h1>
-	<p>Welcome to this web app</p>
-	{% for post in posts %}
-		<div>
-			<h3>{{ post.title }}</h3>
-			<p><b> - First name: </b>{{ post.first_name }}</p>
-			<p><b> - Last name: </b>{{ post.last_name }}</p>
-			<p> -- {{ post.content }}</p>
-		</div>
-	{% endfor %}
+	<h1>Home- Language table</h1>
+	<p>Welcome to this Language web application!</p>
+	<div>
+	<head>
+	<style>
+	table, th, td {
+  		border: 1px solid black;
+  		border-collapse: collapse;
+	}
+	</style>
+	</head>
+	<table style="width:75%"
+		<tr>
+			<th colspan="5"><span><i>Community Spanish Vocabulary Table</i></span></th>
+		</tr>
+		<tr>
+    			<th>English</th>
+    			<th>Spanish</th>
+    			<th>Comment</th>
+    			<th>Date</th>
+  			<th>Author</th>
+		</tr>
+		{% for post in posts %}>
+  		<tr>
+	  		<td>{{ post.englishh }}</td> <!-- post.english-->
+	  		<td>{{ post.spanishh }}</td> <!-- post.spanish-->
+	  		<td>{{ post.comment }}</td> <!--  post.comment--> 
+			<td>{{ post.date_posted }}</td>
+			<td>{{ post.author.first_name }}</td>
+  		</tr>
+		{% endfor %}
+	</table>
+
+	</div>
 {% endblock body_content %}
+
+<!-- post.author.last_name -->

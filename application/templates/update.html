@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block body_content %}
-	<div class="form">
-		<form method="POST" action="">
-			{{ form.hidden_tag() }}
+<h1>{{ current_user.first_name }} {{ current_user.last_name }} Update Page</h1>
+        <p>Adjust the table here!</p>
+        <div class="form">
+                <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+			<!-- Updating the table-->
                         <div class="form-group">
                         {{ form.englishh.label }}
                                 {% if form.englishh.errors %}
@@ -33,8 +34,8 @@
                                 {% endif %}
                         </div>
                         <br>
-			<div class="form-group">
-                        {{ form.comment.label }}
+                        <div class="form-group">
+                                {{ form.comment.label }}
                                 {% if form.comment.errors %}
                                         {{ form.comment }}
                                         <div class="error">
@@ -47,23 +48,9 @@
                                 {% endif %}
                         </div>
                         <br>
-			<div class="form-group">
-                        {{ form.author.label }}
-                                {% if form.author.errors %}
-                                        {{ form.author }}
-                                        <div class="error">
-                                                {% for error in form.author.errors %}
-                                                        <span>{{ error }}</span>
-                                                {% endfor %}
-                                        </div>
-                                {% else %}
-                                        {{ form.author }}
-                                {% endif %}
+                        <div class="form-group">
+                                {{ form.submit }}
                         </div>
-                        <br>
-			<div class="form-group">
-				{{ form.submit }}
-			</div>
-		</form>
-	</div>
+                </form>
+        </div>
 {% endblock body_content %}
