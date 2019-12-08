@@ -51,7 +51,6 @@ class TestBase(TestCase):
         db.session.remove()
         db.drop_all()
 
-
 class testingtesting(TestBase):
     
     def test_homepage_view(self):
@@ -66,5 +65,37 @@ class testingtesting(TestBase):
         target_url = url_for('account')
         response = self.client.get(target_url)
         self.assertEqual(response.status_code, 302)
+
+    def test_add_update_delete(self):
+        post = Posts(englishh="yes", spanishh="si", comment="n/a")
+        db.session.add(post)
+        db.session.commit()
+
+        self.assertEqual(Posts.query.count(), 1)
+    def test_update_account(self):
+        user = Users(first_name="lucy", last_name="lu", email="lucylu@gmail.com", password="lucylu")
+        db.session.add(user)
+        db.session.commit()
+        user = Users(first_name="simon", last_name="chen", email="simon@gmail.com", password="simon")
+        db.session.commit()
+
+        self.assertEqual(Users.query.count(), 3)
+
+    def test_delete_account(self):
+        user = Users(first_name="simon", last_name="chen", email="simon@gmail.com", password="simon")
+        db.session.add(user)
+        db.session.commit()
+
+        db.session.delete(user)
+        db.session.commit()
+
+        self.assertEqual(Users.query.count(), 2)
+
+
+
+
+        
+        
+
 
 
