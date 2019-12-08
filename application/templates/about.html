@@ -1,34 +1,19 @@
-<!DOCTYPE html>
-{% extends "layout.html" %}
-{% block body_content %}
-        <h1>Register page</h1>
-        <p>Need an account? Sign up!</p>
-        <div class="form">
-                <form method="POST" action="">
-                        {{ form.hidden_tag() }}
+<!-- <!DOCTYPE html>-->
 
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block body_content %}
 	<h1>Delete Page</h1>
 	<p>Do you want to delete?</p>
 	<div class="form">
                 <form method="POST" action="">
                         {{ form.hidden_tag() }}
-
-	<div class="form-group">
-        			{{ form.confirm_password.label }}
-                                {% if form.confirm_password.errors %}
-                                        {{ form.confirm_password }}
-                                        <div class="error">
-                                                {% for error in form.confirm_password.errors %}
-                                                        <span>{{ error }}</span>
-                                                {% endfor %}
-                                        </div>
-                                {% else %}
-                                        {{ form.confirm_password }}
-                                {% endif %}
+                         <div class="form-group">
+                                {{ form.remember.label }}
+                                {{ form.remember }}
                         </div>
-                        <br><div class="form-group">
-        	{{ form.submit }}
-        </div>
+                        <br>
+                        <div class="form-group">
+                                {{ form.submit }}
+                        </div>
+                </form>  
 {% endblock body_content %}

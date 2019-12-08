@@ -2,13 +2,15 @@ from application import db
 from flask_login import UserMixin
 from datetime import datetime
 
+
+
 class Posts(db.Model):#User-Vocab
     id = db.Column(db.Integer, primary_key=True) 
     englishh = db.Column(db.String(100), nullable=False, unique=True) #
     spanishh = db.Column(db.String(100), nullable=False, unique=True)
     comment = db.Column(db.String(100), nullable=True, unique=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
         return ''.join([
@@ -55,3 +57,4 @@ class Users(db.Model, UserMixin):
    #         'User ID: ', self.user_id, '\r\n',
     #        'Title: ', self.title, '\r\n', self.content
      #   ])
+

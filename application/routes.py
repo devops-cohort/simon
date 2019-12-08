@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import Posts, Users
-from application.forms import PostForm, RegistrationForm, LoginForm, UpdateAccountForm, UpdateTableForm
+from application.forms import PostForm, RegistrationForm, LoginForm, UpdateAccountForm, UpdateTableForm, DeleteForm
 from flask_login import login_user, current_user, logout_user, login_required, LoginManager
 
 @app.route('/')
@@ -10,9 +10,9 @@ def home():
     postData = Posts.query.all() 
     return render_template('home.html', title='Home', posts=postData)
     
-@app.route('/about')
-def about():
-    return render_template('about.html', title='About')
+#@app.route('/about')
+#def about():
+#    return render_template('about.html', title='About')
 
 @app.route('/post', methods=['GET','POST'])
 @login_required
@@ -126,20 +126,37 @@ def update():
        # form.comment.data = post.comment
     return render_template('update.html', title='Update', form=form)
 
-@app.route("/about", methods=['GET','POST'])
+@app.route("/delete") # , methods=['GET','POST'])
 def delete():
+    if current_user.is_authenticated:
+        form = DeleteForm()
+        if form.validate_on_submit:
+            user_id = Users.query.filter_by( id=current_user.get_id() ).first()
+
+            posts = Posts.query.filter_by( user_id=user_id.id )
+            for post in posts:
+                db.session.delete(post)
+
+            db.session.delete(user_id)
+
+            db.session.commit()
+            return redirect(url_for("login"))
+
+        return render_template('about.html', title='About', form=form)
+    return redirect(url_for("login"))
+
    # if current_user.is_authenticated:
     #    return redirect(url_for('home'))
-
-    form = DeleteForm()
-    if form.validate_on_submit():
-        user = Users(
-                first_name=form.first_name.data,
-                last_name=form.last_name.data,
-                email=form.email.data,
-                password=hashed_pw
-        )
-        db.session.delete(user)
-        db.session.commit()
-        return redirect(url_for('register'))
-    return render_template('about.html', title='Delete', form=form)
+#    form = DeleteForm()
+#    if form.validate_on_submit():
+       # delete_user(user, delete=form.delete.data)
+       # user = Users(
+#                first_name=form.first_name.data,
+ #               last_name=form.last_name.data,
+  #              email=form.email.data,
+   #             password=hashed_pw
+    #    )
+     #   db.session.delete(user)
+      #  db.session.commit()
+       # return redirect(url_for('register'))
+#    return render_template('about.html', title='About', form=form)
